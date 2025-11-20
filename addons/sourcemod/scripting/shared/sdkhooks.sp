@@ -142,7 +142,6 @@ static Action OnPlayerJarated(UserMsg msg_id, BfRead bf, const int[] players, in
 	int attacker = bf.ReadByte();
 	int victim = bf.ReadByte();
 
-	PrintToChatAll("terst2");
 	int weapon = GetPlayerWeaponSlot(attacker, TFWeaponSlot_Secondary);
 	if(weapon != -1)
 	{
