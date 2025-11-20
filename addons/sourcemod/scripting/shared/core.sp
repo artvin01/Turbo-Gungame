@@ -106,6 +106,7 @@ public void OnMapStart()
 	SDKHook_MapStart();
 	ViewChange_MapStart();
 	Zero(f_PreventMovementClient);
+	f_RoundStartUberLastsUntil = 0.0;
 	//precache or fastdl
 	g_particleCritText = PrecacheParticleSystem("crit_text");
 	g_particleMiniCritText = PrecacheParticleSystem("minicrit_text");
