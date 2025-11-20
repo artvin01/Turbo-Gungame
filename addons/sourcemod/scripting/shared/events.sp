@@ -55,8 +55,8 @@ public Action OnPlayerDeath(Event event, const char[] name, bool dontBroadcast)
 	}
 	else
 	{
-		CPrintToChat(attacker,"%s You just deranked %N", GGR_PREFIX, victim);
-		CPrintToChat(victim,"%s %N just deranked you!!!!", GGR_PREFIX, victim);
+		CPrintToChat(attacker,"%s You just deranked %N!!!!", GGR_PREFIX, victim);
+		CPrintToChat(victim,"%s %N just deranked you!!!!", GGR_PREFIX, attacker);
 		EmitSoundToClient(victim, "mvm/mvm_money_vanish.wav", _, _, 90, _, 1.0, 100);
 		EmitSoundToClient(attacker, "mvm/mvm_money_vanish.wav", _, _, 90, _, 1.0, 100);
 		ClientAtWhatScore[victim]--;
