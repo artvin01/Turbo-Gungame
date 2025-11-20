@@ -44,7 +44,10 @@ public MRESReturn DHook_ManageRegularWeaponsPre(int client, DHookParam param)
 	// Gives our desired class's wearables
 	IsInsideManageRegularWeapons = true;
 	//select their class here again.
-	CurrentClass[client] = view_as<TFClassType>(GetEntProp(client, Prop_Send, "m_iDesiredPlayerClass"));
+	if(Cvar_GGR_AllowFreeClassPicking.IntValue)
+		CurrentClass[client] = view_as<TFClassType>(GetEntProp(client, Prop_Send, "m_iDesiredPlayerClass"));
+
+
 	if(!CurrentClass[client])
 	{
 		CurrentClass[client] = TFClass_Scout;

@@ -364,6 +364,8 @@ int Weapons_GiveItem(int client, int index, bool &use=false, bool &found=false)
 
 	}
 
+	ViewChange_PlayerModel(client);
+	ViewChange_Update(client);
 	return entity;
 }
 

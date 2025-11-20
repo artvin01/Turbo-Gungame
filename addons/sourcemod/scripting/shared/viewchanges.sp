@@ -201,6 +201,8 @@ static void GetTeamOverride(int &team)
 
 void ViewChange_PlayerModel(int client)
 {
+	
+
 	int ViewmodelPlayerModel = EntRefToEntIndex(i_Viewmodel_PlayerModel[client]);
 	if(IsValidEntity(ViewmodelPlayerModel))
 	{
@@ -370,6 +372,7 @@ void ViewChange_Update(int client, bool full = true)
 	}
 	
 	ViewChange_Switch(client, weapon, classname);
+	ViewChange_PlayerModel(client);
 }
 public void AntiSameFrameUpdateRemove0(int client)
 {
@@ -436,6 +439,8 @@ void ViewChange_Switch(int client, int active, const char[] classname)
 					class = view_as<TFClassType>(i_WeaponForceClass[active]);
 				}
 			}
+			if(!Cvar_GGR_AllowFreeClassPicking.IntValue)
+				CurrentClass[client] = class;
 
 			
 			SetEntProp(entity, Prop_Send, "m_nModelIndex", HandIndex[class]);

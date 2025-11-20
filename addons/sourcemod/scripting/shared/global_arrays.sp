@@ -5,6 +5,7 @@ float TickrateModify;
 int TickrateModifyInt;
 
 ConVar Cvar_GGR_WeaponsTillWin;
+ConVar Cvar_GGR_AllowFreeClassPicking;
 
 
 Handle g_hSetLocalOrigin;
