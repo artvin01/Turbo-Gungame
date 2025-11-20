@@ -606,9 +606,12 @@ void HidePlayerWeaponModel(int client, int entity, bool OnlyHide = false)
 	SetEntPropFloat(entity, Prop_Send, "m_fadeMinDist", 0.0);
 	SetEntPropFloat(entity, Prop_Send, "m_fadeMaxDist", 0.00001);
 	
-	ItemInfo info;
-	WeaponList.GetArray(StoreWeapon[entity], info);
-	Format(c_WeaponName[client],sizeof(c_WeaponName[]),"%s",info.WeaponName);	
+	if(StoreWeapon[entity] >= 0)
+	{
+		ItemInfo info;
+		WeaponList.GetArray(StoreWeapon[entity], info);
+		Format(c_WeaponName[client],sizeof(c_WeaponName[]),"%s",info.WeaponName);	
+	}
 	if(OnlyHide)
 		return;
 	int EntityWeaponModel = EntRefToEntIndex(i_Worldmodel_WeaponModel[client]);
