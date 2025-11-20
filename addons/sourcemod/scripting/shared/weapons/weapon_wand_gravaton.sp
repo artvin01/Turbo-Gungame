@@ -166,7 +166,6 @@ public Action Smite_Timer_Gravaton_Wand(Handle Smite_Logic, DataPack data)
 	{
 		return Plugin_Stop;
 	}
-	PrintToChatAll("damage 1 %f",damage);
 	TF2_Explode(client, startPosition, damage, Ionrange, "ExplosionCore_MidAir", "weapons/airstrike_small_explosion_01.wav");
 	
 	/*
