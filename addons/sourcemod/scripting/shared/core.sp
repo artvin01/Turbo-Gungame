@@ -68,6 +68,7 @@
 #include "weapons/weapon_fists_of_kahml.sp"
 #include "weapons/weapon_arrow_shot.sp"
 #include "weapons/weapon_default_wand.sp"
+#include "weapons/weapon_ant_jar.sp"
 
 public Plugin myinfo =
 {

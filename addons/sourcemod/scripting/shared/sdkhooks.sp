@@ -12,6 +12,7 @@ Handle SyncHud_GunGame;
 void SDKHook_PluginStart()
 {
 	SyncHud_GunGame = CreateHudSynchronizer();
+	HookUserMessage(GetUserMessageId("PlayerJarated"), OnPlayerJarated);
 }
 
 
@@ -133,4 +134,26 @@ public Action Player_TraceAttack(int victim, int& attacker, int& inflictor, floa
 		}
 	}
 	return Plugin_Changed;
+}
+
+static Action OnPlayerJarated(UserMsg msg_id, BfRead bf, const int[] players, int playersNum, bool reliable, bool init)
+{
+	int attacker = bf.ReadByte();
+	int victim = bf.ReadByte();
+
+	int weapon = GetPlayerWeaponSlot(attacker, TFWeaponSlot_Secondary);
+	if(weapon != -1)
+	{
+		Function func = EntityFuncJarate[weapon];
+		if(func && func!=INVALID_FUNCTION)
+		{
+			Call_StartFunction(null, func);
+			Call_PushCell(attacker);
+			Call_PushCell(weapon);
+			Call_PushCell(victim);
+			Call_Finish();
+		}
+	}
+
+	return Plugin_Continue;
 }

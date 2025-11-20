@@ -32,6 +32,8 @@ enum struct ItemInfo
 	Function FuncAttack3;
 	Function FuncReload4;
 	Function FuncWeaponCreated;
+	Function FuncJarate;
+
 	void Self(ItemInfo info)
 	{
 		info = this;
@@ -110,6 +112,9 @@ enum struct ItemInfo
 		Format(buffer, sizeof(buffer), "%sweapon_hud_extra", prefix);
 		kv.GetString(buffer, this.WeaponHudExtra, sizeof(buffer));
 		
+		Format(buffer, sizeof(buffer), "%sfunc_jarate", prefix);
+		kv.GetString(buffer, buffer, sizeof(buffer));
+		this.FuncJarate = GetFunctionByName(null, buffer);
 		
 		static char buffers[64][16];
 		Format(buffer, sizeof(buffer), "%sattributes", prefix);
