@@ -77,6 +77,7 @@
 #include "weapons/weapon_vehicular_manslaughter.sp"
 #include "weapons/weapon_sharedtakedamage.sp"
 #include "weapons/weapon_sharedfuncattack.sp"
+#include "weapons/weapon_kamikaze.sp"
 
 public Plugin myinfo =
 {
@@ -172,6 +173,7 @@ public void OnMapStart()
 	Gravaton_Wand_MapStart();
 	VehicularManslaughter_Precache();
 	SharedTakeDamage_Mapstart();
+	KamikazeMapStart();
 }
 
 public void OnConfigsExecuted()
