@@ -41,7 +41,7 @@ public Action OnToucher_Touch(int entity, int target)
 {
 	if(IsValidEnemy(entity, target))
 	{
-		SDKHooks_TakeDamage(target, entity, entity, 5.0, DMG_PREVENT_PHYSICS_FORCE|DMG_CRUSH, _, {0.0, 0.0, 0.0});
+		SDKHooks_TakeDamage(target, entity, entity, 10.0, DMG_PREVENT_PHYSICS_FORCE|DMG_CRUSH, _, {0.0, 0.0, 0.0});
 	}
 
 	return Plugin_Continue;
