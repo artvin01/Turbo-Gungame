@@ -993,13 +993,17 @@ stock void SetTeam(int entity, int teamSet)
 }
 
 
-stock bool IsValidEnemy(int index, int enemy, bool camoDetection=false, bool target_invul = false)
+stock bool IsValidEnemy(int index, int enemy)
 {
 	if(enemy <= 0)
 		return false;
 		
 	if(IsValidEntity(enemy))
 	{
+		if(!ValidTargetToHit[enemy])
+		{
+			return false;
+		}
 		if(index == enemy)
 		{
 			return false;
@@ -1008,18 +1012,12 @@ stock bool IsValidEnemy(int index, int enemy, bool camoDetection=false, bool tar
 		{
 			return false;
 		}
-
-		if(enemy <= MaxClients)
+		if(!mp_friendlyfire.IntValue && GetTeam(index) == GetTeam(enemy))
 		{
-			if(!mp_friendlyfire.IntValue && GetTeam(index) == GetTeam(enemy))
-			{
-				return false;
-			}
-			else
-			{
-				return IsEntityAlive(enemy, true);
-			}
+			return false;
 		}
+
+		return IsEntityAlive(enemy, true);
 	}
 	return false;
 }
@@ -1148,7 +1146,7 @@ public bool BulletAndMeleeTrace(int entity, int contentsMask, any iExclude)
 		return false;
 	}
 	
-	if(IsValidEnemy(iExclude, entity, true, true))
+	if(IsValidEnemy(iExclude, entity))
 		return !(entity == iExclude);
 
 	return !(entity == iExclude);

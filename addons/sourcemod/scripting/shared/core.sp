@@ -72,8 +72,11 @@
 #include "weapons/weapon_default_wand.sp"
 #include "weapons/weapon_ant_jar.sp"
 #include "weapons/weapon_builder.sp"
+#include "weapons/weapon_toucher.sp"
 #include "weapons/weapon_wand_gravaton.sp"
 #include "weapons/weapon_vehicular_manslaughter.sp"
+#include "weapons/weapon_sharedtakedamage.sp"
+#include "weapons/weapon_sharedfuncattack.sp"
 
 public Plugin myinfo =
 {
@@ -168,6 +171,7 @@ public void OnMapStart()
 	Wand_Map_Precache();
 	Gravaton_Wand_MapStart();
 	VehicularManslaughter_Precache();
+	SharedTakeDamage_Mapstart();
 }
 
 public void OnConfigsExecuted()
@@ -193,6 +197,7 @@ public void OnClientPutInServer(int client)
 	Core_DoTickrateChanges();
 	
 	SDKHook_HookClient(client);
+	ValidTargetToHit[client] = true;
 }
 
 public void OnEntityCreated(int entity, const char[] classname)
@@ -204,6 +209,7 @@ public void OnEntityCreated(int entity, const char[] classname)
 	if (!IsValidEntity(entity))
 		return;
 
+	ValidTargetToHit[entity] = false;
 	i_SavedActualWeaponSlot[entity] = -1;
 	b_IsATrigger[entity] = false;
 	b_IsATriggerHurt[entity] = false;
@@ -234,6 +240,10 @@ public void OnEntityCreated(int entity, const char[] classname)
 	else if(!StrContains(classname, "item_healthkit_medium"))
 	{
 		SDKHook(entity, SDKHook_Touch, SandvichTouch);
+	}
+	else if(!StrContains(classname, "obj_"))
+	{
+		ValidTargetToHit[entity] = true;
 	}
 }
 

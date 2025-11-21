@@ -381,7 +381,7 @@ stock int Target_Hit_Wand_Detection(int owner_projectile, int other_entity)
 	{
 		return -1;
 	}
-	else if(IsValidEnemy(owner_projectile, other_entity, true, true))
+	else if(IsValidEnemy(owner_projectile, other_entity))
 	{
 		
 		return other_entity;

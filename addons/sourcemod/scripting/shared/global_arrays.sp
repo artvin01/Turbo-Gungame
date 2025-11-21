@@ -63,6 +63,7 @@ int i_WandOwner[MAXENTITIES]; //				//785
 int i_WeaponKilledWith[MAXPLAYERS];
 
 int StoreWeapon[MAXENTITIES];
+bool ValidTargetToHit[MAXENTITIES];
 
 Function EntityFuncAttack[MAXENTITIES];
 Function EntityFuncAttack2[MAXENTITIES];
