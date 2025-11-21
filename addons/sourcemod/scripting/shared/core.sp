@@ -79,6 +79,7 @@
 #include "weapons/weapon_sharedfuncattack.sp"
 #include "weapons/weapon_kamikaze.sp"
 #include "weapons/weapon_ant_eraser.sp"
+#include "weapons/weapon_dupstepgun.sp"
 
 public Plugin myinfo =
 {
@@ -175,8 +176,8 @@ public void OnMapStart()
 	VehicularManslaughter_Precache();
 	SharedTakeDamage_Mapstart();
 	KamikazeMapStart();
+	DupStepGunMapStart();
 }
-
 public void OnConfigsExecuted()
 {
 	ConVar_Enable();

@@ -286,7 +286,6 @@ public void Wand_Base_StartTouch(int entity, int other)
 		Call_PushCell(entity);
 		Call_PushCell(target);
 		Call_Finish();
-		//todo: convert all on death and on take damage to this.
 		return;
 	}
 }
