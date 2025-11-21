@@ -6,6 +6,7 @@ static Handle Local_Timer[MAXPLAYERS] = {null, ...};
 public void KamikazeMapStart()
 {
 	PrecacheSound("mvm/mvm_tank_explode.wav");
+	PrecacheSound("mvm/sentrybuster/mvm_sentrybuster_intro.wav");
 }
 public void KamikazteForceTaunt(int client, int weapon, bool crit, int slot)
 {
@@ -19,6 +20,7 @@ public void KamikazeCreate(int client, int weapon)
 		Local_Timer[client] = null;
 	}
 
+	EmitSoundToAll("mvm/sentrybuster/mvm_sentrybuster_intro.wav", client, SNDCHAN_STATIC, 80, _, 0.65);
 	DataPack pack;
 	Local_Timer[client] = CreateDataTimer(0.1, Timer_Local, pack, TIMER_REPEAT);
 	pack.WriteCell(client);
@@ -41,7 +43,19 @@ static Action Timer_Local(Handle timer, DataPack pack)
 	if (TF2_IsPlayerInCondition(client, TFCond_Taunting))
 	{
 		Local_Timer[clientidx] = null;
+		int viewmodelModel;
+		viewmodelModel = EntRefToEntIndex(i_Viewmodel_PlayerModel[client]);
+		
+		float flPos[3]; // original
+		float flAng[3]; // original
+		if(IsValidEntity(viewmodelModel))
+		{
+			GetAttachment(viewmodelModel, "effect_hand_r", flPos, flAng);
+			int Particle = ParticleEffectAt(flPos, "raygun_projectile_red_crit", 1.0);
+			SetParent(viewmodelModel, Particle, "effect_hand_r");
+		}
 		//1.5 seconds very accurate
+		EmitGameSoundToAll ("Soldier.CritDeath", client);
 		DataPack pack1 = new DataPack();
 		pack1.WriteCell(EntIndexToEntRef(client));
 		pack1.WriteCell(EntIndexToEntRef(weapon));

@@ -78,6 +78,7 @@
 #include "weapons/weapon_sharedtakedamage.sp"
 #include "weapons/weapon_sharedfuncattack.sp"
 #include "weapons/weapon_kamikaze.sp"
+#include "weapons/weapon_ant_eraser.sp"
 
 public Plugin myinfo =
 {

@@ -5,6 +5,7 @@
 static Handle Local_Timer[MAXPLAYERS] = {null, ...};
 public void TheToucher_WeaponCreated(int client, int weapon)
 {
+	
 	SDKUnhook(client, SDKHook_Touch, OnToucher_Touch);
 	SDKHook(client, SDKHook_Touch, OnToucher_Touch);
 	if (Local_Timer[client] != null)

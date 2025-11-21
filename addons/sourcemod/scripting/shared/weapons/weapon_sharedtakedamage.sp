@@ -110,3 +110,13 @@ public Action ThisIsSparta_Touch(int entity, int target)
 
 	return Plugin_Continue;
 }
+
+
+public Action TheFish_OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype, int &weapon, float damageForce[3], float damagePosition[3], int damagecustom)
+{
+	float fAng[3];
+	GetClientEyeAngles(victim, fAng);
+	fAng[1] += 180.0;
+	SnapEyeAngles(victim, fAng);
+	return Plugin_Continue;
+}
