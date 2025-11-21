@@ -1037,7 +1037,11 @@ stock bool IsEntityAlive(int index, bool WasValidAlready = false)
 		}
 		else
 		{
-			if(!IsPlayerAlive(index))
+			if(GetEntProp(index, Prop_Send, "m_iHealth") < 1)
+			{
+				return true;
+			}
+			else if(!IsPlayerAlive(index))
 			{
 				return false;	
 			}
@@ -1351,4 +1355,32 @@ float GetClientSpeed(int client, bool horizontalOnly = false)
 		z = vecClientVel[2];
 	
 	return SquareRoot(x*x + y*y + z*z);
+}
+
+
+void CopyVector(const float from[3], float out[3])
+{
+	out[0] = from[0];
+	out[1] = from[1];
+	out[2] = from[2];
+}
+// interpolate between 2 values as a percentage
+float LerpValue(float p, float a, float b)
+{
+	return a + (b - a) * p;
+}
+public void Items_GrenadeTrajectory(const float angles[3], float velocity[3], float scale)
+{
+	velocity[0] = Cosine(DegToRad(angles[0])) * Cosine(DegToRad(angles[1])) * scale;
+	velocity[1] = Cosine(DegToRad(angles[0])) * Sine(DegToRad(angles[1])) * scale;
+	velocity[2] = Sine(DegToRad(angles[0])) * -scale;
+}
+bool IsPointTouchingBox(float pos[3], float mins[3], float maxs[3])
+{
+	if ( pos[0] < mins[0] || pos[0] > maxs[0] ||
+		 pos[1] < mins[1] || pos[1] > maxs[1] ||
+		 pos[2] < mins[2] || pos[2] > maxs[2] )
+		return false;
+		
+	return true;
 }

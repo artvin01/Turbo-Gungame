@@ -80,6 +80,8 @@
 #include "weapons/weapon_kamikaze.sp"
 #include "weapons/weapon_ant_eraser.sp"
 #include "weapons/weapon_dupstepgun.sp"
+#include "weapons/weapon_cow_mangler.sp"
+#include "weapons/weapon_scp018.sp"
 
 public Plugin myinfo =
 {
@@ -177,6 +179,8 @@ public void OnMapStart()
 	SharedTakeDamage_Mapstart();
 	KamikazeMapStart();
 	DupStepGunMapStart();
+	CowMangler_Precache();
+	Init_SCP18();
 }
 public void OnConfigsExecuted()
 {
@@ -203,7 +207,10 @@ public void OnClientPutInServer(int client)
 	SDKHook_HookClient(client);
 	ValidTargetToHit[client] = true;
 }
-
+public void OnGameFrame()
+{
+	SCP18_Tick();
+}
 public void OnEntityCreated(int entity, const char[] classname)
 {
 	if (entity < 0)
