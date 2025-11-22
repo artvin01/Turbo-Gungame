@@ -43,6 +43,7 @@ public void BonkBat_PostTakeDamage(int victim)
     GetEntPropVector(victim, Prop_Data, "m_vecAbsVelocity", vel);
     
     vel[2] = BonkBat_Max(vel[2], 1.0);
+    vel[2] * 1000.0;
     
     Custom_SetAbsVelocity(victim, vel);
     
