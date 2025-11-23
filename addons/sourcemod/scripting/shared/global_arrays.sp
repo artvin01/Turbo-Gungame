@@ -35,7 +35,6 @@ ConVar tf_scout_air_dash_count;
 
 
 int i_WeaponVMTExtraSetting[MAXENTITIES];
-int h_NpcSolidHookType[MAXENTITIES];
 bool b_IsATrigger[MAXENTITIES];
 bool b_IsATriggerHurt[MAXENTITIES];
 int i_CustomWeaponEquipLogic[MAXENTITIES]={0, ...};

@@ -161,10 +161,7 @@ float CustomPos[3] = {0.0,0.0,0.0}) //This will handle just the spawning, the re
 		SDKHook(entity, SDKHook_Think, ProjectileBaseThink);
 		SDKHook(entity, SDKHook_ThinkPost, ProjectileBaseThinkPost);
 
-		if(h_NpcSolidHookType[entity] != 0)
-			DHookRemoveHookID(h_NpcSolidHookType[entity]);
-		h_NpcSolidHookType[entity] = 0;
-		h_NpcSolidHookType[entity] = g_DHookRocketExplode.HookEntity(Hook_Pre, entity, Wand_DHook_RocketExplodePre); 
+		g_DHookRocketExplode.HookEntity(Hook_Pre, entity, Wand_DHook_RocketExplodePre); 
 		SDKHook(entity, SDKHook_ShouldCollide, Never_ShouldCollide);
 		SDKHook(entity, SDKHook_StartTouch, Wand_Base_StartTouch);
 
