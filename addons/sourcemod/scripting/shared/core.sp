@@ -115,7 +115,6 @@ public void OnPluginStart()
 	SDKCall_Setup();
 	Events_PluginStart();
 	SDKHook_PluginStart();
-	ConVar_PluginStart();
 	WandProjectile_GamedataInit();
 	
 	RegAdminCmd("sm_give_gun", Command_ForceGiveGunName, ADMFLAG_ROOT, "Give a gun to a person");
