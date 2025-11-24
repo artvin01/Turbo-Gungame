@@ -16,6 +16,7 @@ public Action AntiGravityGrenade_TakeDamage(int victim, int &attacker, int &infl
 	Attributes_Set(victim, Attrib_MultiplyFallDamage, 100.0);
 	CreateTimer(0.35, Timer_SlamVictimDown, EntIndexToEntRef(victim), TIMER_FLAG_NO_MAPCHANGE);
 	TeleportEntity(victim, NULL_VECTOR, NULL_VECTOR, {0.0,0.0, 1000.0});
+	i_FallDamageKillCredit[victim] = EntIndexToEntRef(attacker);
 	return Plugin_Continue;
 }
 
@@ -25,7 +26,6 @@ public Action Timer_SlamVictimDown(Handle timer, any entid)
 	if(!IsEntityAlive(victim))
 		return Plugin_Stop;
 
-	i_FallDamageKillCredit[victim] = EntIndexToEntRef(attacker);
 	TeleportEntity(victim, NULL_VECTOR, NULL_VECTOR, {0.0,0.0, -2000.0});
 	return Plugin_Stop;
 }

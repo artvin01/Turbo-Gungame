@@ -24,8 +24,8 @@ void WandProjectile_GamedataInit()
 {
 	CEntityFactory EntityFactory = new CEntityFactory("zr_projectile_base", OnCreate_Proj, OnDestroy_Proj);
 	EntityFactory.DeriveFromClass("prop_dynamic");
-		.DefineFloatField("m_vInitialVelocity")
 	EntityFactory.BeginDataMapDesc()
+		.DefineFloatField("m_vInitialVelocity")
 	.EndDataMapDesc(); 
 
 	EntityFactory.Install();
@@ -107,9 +107,10 @@ float CustomPos[3] = {0.0,0.0,0.0}) //This will handle just the spawning, the re
 		//Edit: Need owner entity, otheriwse you can actuall hit your own god damn rocket and make a ding sound. (Really annoying.)
 		SetTeam(entity, GetTeam(client));
 		int frame = GetEntProp(entity, Prop_Send, "m_ubInterpolationFrame");
-		TeleportEntity(entity, fPos, fAng, NULL_VECTOR);
+		Custom_SDKCall_SetLocalOrigin(entity, fPos);
 		DispatchSpawn(entity);
 		SetEntPropVector(entity, Prop_Send, "m_angRotation", fAng); //set it so it can be used
+		SetEntPropVector(entity, Prop_Data, "m_angRotation", fAng); 
 		
 		SetEntPropFloat(entity, Prop_Data, "m_flSimulationTime", GetGameTime());
 		SetEntProp(entity, Prop_Send, "m_ubInterpolationFrame", frame);
@@ -119,9 +120,6 @@ float CustomPos[3] = {0.0,0.0,0.0}) //This will handle just the spawning, the re
 		SetEntityModel(entity, ENERGY_BALL_MODEL);
 		RunScriptCode(entity, -1, -1, "self.SetMoveType(Constants.EMoveType.MOVETYPE_FLY, Constants.EMoveCollide.MOVECOLLIDE_FLY_CUSTOM)");
 		Custom_SetAbsVelocity(entity, fVel);	
-
-		//Make it entirely invis. Shouldnt even render these 8 polygons.
-	//	SetEntProp(entity, Prop_Send, "m_fEffects", GetEntProp(entity, Prop_Send, "m_fEffects") &~ EF_NODRAW);
 		
 		if(hideprojectile)
 		{
