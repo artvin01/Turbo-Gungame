@@ -91,6 +91,7 @@
 #include "weapons/weapon_fartgun.sp"
 #include "weapons/weapon_poisoned_sandvich.sp"
 #include "weapons/weapon_hookshot.sp"
+#include "weapons/weapon_redeemer.sp"
 
 public Plugin myinfo =
 {
@@ -135,6 +136,7 @@ public void OnMapStart()
 	ViewChange_MapStart();
 	Zero(f_PreventMovementClient);
 	Zero(f_PreventKillCredit);
+	Zero(f_RetryRespawn);
 	f_RoundStartUberLastsUntil = 0.0;
 	//precache or fastdl
 	g_particleCritText = PrecacheParticleSystem("crit_text");
@@ -202,6 +204,7 @@ public void OnMapStart()
 	PosionSandvichMapStart();
 	HookshotMapStart();
 	Spell_MapStart();
+	Redeemer_Precache();
 }
 public void OnConfigsExecuted()
 {
@@ -445,6 +448,27 @@ public void TF2_OnConditionRemoved(int client, TFCond condition)
 }
 
 
+public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon, int &subtype, int &cmdnum, int &tickcount, int &seed, int mouse[2])
+{
+	Function func = EntityPlayerCMD[client];
+	if(func && func!=INVALID_FUNCTION)
+	{
+		Call_StartFunction(null, func);
+		Call_PushCell(client);
+		Call_PushCellRef(buttons);
+		Call_PushCellRef(impulse);
+		Call_PushArray(vel, sizeof(vel));
+		Call_PushArray(angles, sizeof(angles));
+		Call_PushCellRef(weapon);
+		Call_PushCellRef(subtype);
+		Call_PushCellRef(cmdnum);
+		Call_PushCellRef(tickcount);
+		Call_PushCellRef(seed);
+		Call_PushArray(mouse, sizeof(mouse));
+		Call_Finish();
+	}
+	return Plugin_Changed;
+}
 public Action TF2_CalcIsAttackCritical(int client, int weapon, char[] classname, bool &result)
 {
 	Action action = Plugin_Continue;

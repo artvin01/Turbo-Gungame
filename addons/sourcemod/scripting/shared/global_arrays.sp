@@ -62,6 +62,7 @@ int i_WeaponKilledWith[MAXPLAYERS];
 bool b_DiedToFallDamage[MAXPLAYERS];
 int i_FallDamageKillCredit[MAXPLAYERS];
 
+float f_RetryRespawn[MAXPLAYERS]={0.0, ...};
 int StoreWeapon[MAXENTITIES];
 bool ValidTargetToHit[MAXENTITIES];
 
@@ -73,6 +74,7 @@ Function EntityFuncReloadCreate[MAXENTITIES];
 Function EntityFuncRemove[MAXENTITIES];
 Function EntityFuncJarate[MAXENTITIES];
 Function EntityFuncTakeDamage[MAXENTITIES];
+Function EntityPlayerCMD[MAXENTITIES];
 TFClassType CurrentClass[MAXPLAYERS]={TFClass_Scout, ...};
 TFClassType WeaponClass[MAXPLAYERS]={TFClass_Scout, ...};
 

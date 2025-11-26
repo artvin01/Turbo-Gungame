@@ -305,6 +305,10 @@ static void OnDestroy_Proj(CBaseCombatCharacter body)
 	int extra_index = EntRefToEntIndex(iref_PropAppliedToRocket[body.index]);
 	if(IsValidEntity(extra_index))
 		RemoveEntity(extra_index);
+		
+	extra_index = EntRefToEntIndex(i_WandParticle[body.index]);
+	if(IsValidEntity(extra_index))
+		RemoveEntity(extra_index);
 
 	iref_PropAppliedToRocket[body.index] = INVALID_ENT_REFERENCE;
 

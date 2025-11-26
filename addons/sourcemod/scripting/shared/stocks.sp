@@ -1487,3 +1487,8 @@ stock void ModelIndexToString(int index, char[] model, int size)
 	int table = FindStringTable("modelprecache");
 	ReadStringTable(table, index, model, size);
 }
+
+stock float getLinearVelocity(float vecVelocity[3])
+{
+	return SquareRoot((vecVelocity[0] * vecVelocity[0]) + (vecVelocity[1] * vecVelocity[1]) + (vecVelocity[2] * vecVelocity[2]));
+}

@@ -589,7 +589,7 @@ void HidePlayerWeaponModel(int client, int entity, bool OnlyHide = false)
 //	SetEntProp(entity, Prop_Send, "m_fEffects", GetEntProp(entity, Prop_Send, "m_fEffects") | EF_NODRAW);
 	SetEntPropFloat(entity, Prop_Send, "m_fadeMinDist", 0.0);
 	SetEntPropFloat(entity, Prop_Send, "m_fadeMaxDist", 0.00001);
-	
+	EntityPlayerCMD[client] = EntityPlayerCMD[entity];
 	if(StoreWeapon[entity] >= 0)
 	{
 		ItemInfo info;

@@ -15,6 +15,7 @@ public Action OnPlayerDeath(Event event, const char[] name, bool dontBroadcast)
 	int victim = GetClientOfUserId(event.GetInt("userid"));
 	if(!victim)
 		return Plugin_Continue;
+		
 	CreateTimer(1.0, Timer_Respawn, GetClientUserId(victim));
 	if(f_PreventKillCredit[victim] > GetGameTime())
 	{
@@ -131,6 +132,11 @@ public Action Timer_Respawn(Handle timer, any uuid)
 	if(IsPlayerAlive(client))
 		return Plugin_Stop;
 		
+	if(f_RetryRespawn[client] > GetGameTime())
+	{
+		CreateTimer(0.1, Timer_Respawn, GetClientUserId(client));
+		return Plugin_Stop;
+	}
 	int team = GetClientTeam(client);
 	if(team <= 1)
 		return Plugin_Stop;
